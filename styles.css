@@ -1,146 +1,119 @@
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
+/* Hide overflow during animations */
 body {
-  line-height: 1;
+  overflow: hidden;
 }
-ol,
-ul {
-  list-style: none;
+
+/* Add this to re-enable overflow after animations */
+@keyframes restoreOverflow {
+  0% {
+    overflow: hidden;
+  }
+  100% {
+    overflow: auto;
+  }
 }
-blockquote,
-q {
-  quotes: none;
+
+body.overflow-auto {
+  animation: restoreOverflow 1s forwards;
 }
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
+
+.fade-in-image {
+  opacity: 0;
+  animation: fadeInAnimation 1s forwards, enableOverflow 1s forwards;
 }
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+
+.zoom-in {
+  transform: scale(0.8);
+  opacity: 0;
+  animation: zoomInAnimation 0.8s forwards;
+  animation-delay: 0.3s;
 }
-body {
-  -webkit-text-size-adjust: none;
+
+.slide-left {
+  transform: translateX(-50px);
+  opacity: 0;
+  animation: slideLeftAnimation 0.8s forwards;
+  animation-delay: 0.5s;
 }
-mark {
-  background-color: transparent;
-  color: inherit;
+
+.slide-right {
+  transform: translateX(50px);
+  opacity: 0;
+  animation: slideRightAnimation 0.8s forwards;
+  animation-delay: 0.7s;
 }
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
+
+.fade-in-text {
+  opacity: 0;
+  animation: fadeInTextAnimation 0.8s forwards;
+  animation-delay: 0.9s;
 }
-input[type="text"],
-input[type="email"],
-select,
-textarea {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
+
+@keyframes zoomInAnimation {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeftAnimation {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRightAnimation {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInTextAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Restore overflow after the last animation */
+@keyframes enableOverflow {
+  0% {
+    overflow: hidden;
+  }
+  100% {
+    overflow: auto;
+  }
+}
+/* ################################ */
+/* ################################ */
+/* ################################ */
+/* ################################ */
+
 @media (prefers-contrast: more) {
   html {
     filter: brightness(0.9) saturate(0.75) contrast(1.5);
@@ -181,6 +154,12 @@ body:before {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #ffffff;
+
+  /* max-width: 100% !important; */
+  /* object-fit: cover !important; */
+  /* height: 100% !important; */
+  /* width: 75% !important; */
+
 }
 body:after {
   background-color: #ede2dd;
@@ -273,6 +252,7 @@ a[onclick]:not([href]) {
 deferred-script {
   display: none;
 }
+
 #wrapper {
   -webkit-overflow-scrolling: touch;
   align-items: stretch;
@@ -360,55 +340,7 @@ deferred-script {
   margin-left: calc(-100vw + var(--padding-horizontal));
   right: -100%;
 }
-body.is-instant #main,
-body.is-instant #main > .inner > *,
-body.is-instant #main > .inner > section > * {
-  transition: none !important;
-}
-body.is-instant:after {
-  display: none !important;
-  transition: none !important;
-}
-h1,
-h2,
-h3,
-p {
-  direction: var(--site-language-direction);
-  position: relative;
-}
-h1 span.p,
-h2 span.p,
-h3 span.p,
-p span.p {
-  display: block;
-  position: relative;
-}
-h1 span[style],
-h2 span[style],
-h3 span[style],
-p span[style],
-h1 strong,
-h2 strong,
-h3 strong,
-p strong,
-h1 a,
-h2 a,
-h3 a,
-p a,
-h1 code,
-h2 code,
-h3 code,
-p code,
-h1 mark,
-h2 mark,
-h3 mark,
-p mark,
-h1 spoiler-text,
-h2 spoiler-text,
-h3 spoiler-text,
-p spoiler-text {
-  -webkit-text-fill-color: currentcolor;
-}
+
 #text08:not(:first-child) {
   margin-top: 0rem !important;
 }
@@ -436,6 +368,7 @@ p spoiler-text {
 #text08 span.p:nth-child(n + 2) {
   margin-top: 1rem;
 }
+
 #text01 {
   color: rgba(255, 255, 255, 0.788);
   font-family: "Roboto", sans-serif;
@@ -505,7 +438,7 @@ p spoiler-text {
   transition: transform 0.25s ease, color 0.25s ease,
     background-color 0.25s ease, border-color 0.25s ease;
 }
-#buttons02 li a svg {
+#buttons02 li a i {
   display: block;
   fill: #434754;
   flex-grow: 0;
@@ -529,12 +462,13 @@ p spoiler-text {
   background-color: #ffffff;
   color: #434754;
 }
-#buttons02 .button svg {
-  fill: #1da2cc;
+#buttons02 .button i {
+  color: #1da2cc;
 }
 #buttons02 li a:hover {
   transform: scale(1.0425);
 }
+
 .list {
   display: block;
 }
@@ -610,7 +544,7 @@ p spoiler-text {
   width: 0.875rem;
 }
 #list01 ul li:before {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%2040%2040%22%3E%3Cpath%20d%3D%22M31.7%2C21.1L14.3%2C38.5C14%2C38.8%2C13.7%2C39%2C13.2%2C39c-0.4%2C0-0.7-0.1-1.1-0.5l-3.9-3.9c-0.2-0.2-0.5-0.6-0.5-1.1%20c0-0.4%2C0.1-0.7%2C0.5-1.1L20.7%2C20L8.3%2C7.6C8.1%2C7.3%2C7.8%2C7%2C7.8%2C6.5c0-0.4%2C0.1-0.7%2C0.5-1.1l3.9-3.9C12.5%2C1.2%2C12.8%2C1%2C13.3%2C1%20c0.4%2C0%2C0.7%2C0.1%2C1.1%2C0.5l17.4%2C17.4c0.2%2C0.2%2C0.5%2C0.6%2C0.5%2C1.1C32.1%2C20.4%2C31.9%2C20.7%2C31.7%2C21.1z%22%20fill%3D%22%2336CFFF%22%20%2F%3E%3C%2Fsvg%3E");
+  background-image: url("arrow-right.svg");
   border-radius: 0.625rem;
   background-position: left 60%;
   background-repeat: no-repeat;
@@ -619,6 +553,11 @@ p spoiler-text {
   line-height: 1.625rem;
   min-width: 0.76171875rem;
 }
+
+/* 
+media
+*/
+
 @media (max-width: 1920px) {
   body:before {
     width: calc(100vw - 38rem);
@@ -795,22 +734,28 @@ p spoiler-text {
     min-width: 0.76171875rem;
   }
 }
+
 body {
-    overflow: auto !important;
+  overflow: auto !important;
 }
 body:after {
-    display: none !important;
+  display: none !important;
 }
 #main > .inner {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 @media (max-width: 980px) {
-    body:before {
-        flex-grow: 1;
-        flex-shrink: 0;
-        max-height: 45vh;
-        overflow: hidden;
-        position: relative;
-        width: 100%;
+  body:before {
+    flex-grow: 1;
+    flex-shrink: 0;
+    max-height: 45vh;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
 }
+@media (min-width: 1024px) {
+  body:before {
+    width: 75%;
+  }
 }
