@@ -149,6 +149,8 @@ body:before {
   width: calc(100vw - 38rem);
   z-index: 0;
   right: auto;
+  opacity: 0;
+  animation: fadeInAnimation 1s forwards, enableOverflow 1s forwards;
   background-image: url("bg.jpg?v=3ce0ab7a");
   background-position: right;
   background-repeat: no-repeat;
